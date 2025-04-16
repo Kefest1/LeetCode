@@ -48,22 +48,46 @@ struct ListNode *generateReversedList(int number) {
     return list;
 }
 
+void printList(struct ListNode *list) {
+    while (list != NULL) {
+        printf("%d ", list->val);
+        list = list->next;
+    }
+    putchar(10);
+}
+
 int main(void) {
-    struct ListNode *list = calloc(1, sizeof(struct ListNode));
-    list->val = 2;
-    list->next = calloc(1, sizeof(struct ListNode));
-    list->next->val = 4;
-    list->next->next = calloc(1, sizeof(struct ListNode));
-    list->next->next->val = 3;
+    struct ListNode *list1 = calloc(1, sizeof(struct ListNode));
+    list1->val = 2;
+    list1->next = calloc(1, sizeof(struct ListNode));
+    list1->next->val = 4;
+    list1->next->next = calloc(1, sizeof(struct ListNode));
+    list1->next->next->val = 3;
 
+    struct ListNode *list2 = calloc(1, sizeof(struct ListNode));
+    list2->val = 5;
+    list2->next = calloc(1, sizeof(struct ListNode));
+    list2->next->val = 6;
+    list2->next->next = calloc(1, sizeof(struct ListNode));
+    list2->next->next->val = 4;
 
-    int res = calculateReversedSum(list);
-    struct ListNode *resList = generateReversedList(res);
-    free(list->next->next);
-    free(list->next);
-    free(list);
+    int res1 = calculateReversedSum(list1);
+    int res2 = calculateReversedSum(list2);
+    int sum = res1 + res2;
+
+    struct ListNode *resList = generateReversedList(sum);
+    printList(resList);
+
+    free(list1->next->next);
+    free(list1->next);
+    free(list1);
+    free(list2->next->next);
+    free(list2->next);
+    free(list2);
+
     free(resList->next->next);
     free(resList->next);
     free(resList);
-    return res;
+
+    return 0;
 }
